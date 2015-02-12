@@ -70,3 +70,6 @@ relib:
 	@echo "$(OK_COLOR)\t---LIBRARY UP TO DATE---$(NO_COLOR)"
 
 re: fclean all
+
+.obj/draw.o: includes/header.h
+.obj/main.o: includes/header.h

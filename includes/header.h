@@ -19,8 +19,8 @@
 
 # define TRUE		1
 # define FALSE		0
-# define WIDTH		720
-# define HEIGHT		720
+# define WIDTH		800
+# define HEIGHT		800
 
 # define WHITE 0xFFFFFF
 # define GREY 0x555555
@@ -30,13 +30,28 @@
 # define ORANGE 0xED6205
 
 
+
+typedef struct		s_fract
+{
+	double			c_real;
+	double			c_imag;
+	double			new_real;
+	double			new_imag;
+	double			old_real;
+	double			old_imag;
+	double			zoom;
+	double			move_x;
+	double			move_y;
+	int				color;
+	int				iterations;
+}					t_fract;
+
 typedef struct		s_mlx
 {
 	void			*mlx;
 	void			*win;
-	char			**av;
+	int				(*func)(t_fract *, double, double);
 }					t_mlx;
-
 
 void	draw(t_mlx *mlx);
 

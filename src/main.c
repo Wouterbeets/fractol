@@ -31,24 +31,23 @@ int		expose_hook(t_mlx *mlx)
 int		check_args(char** av)
 {
 	if (ft_strcmp(av[1], "mandelbrot") == 0)
-		return (1);
+		return (0);
 	if (ft_strcmp(av[1], "foo") == 0)
-		return (2);
+		return (1);
 	if (ft_strcmp(av[1], "julia") == 0)
-		return (3);
-	return (FALSE);
+		return (2);
+	return (-1);
 }
 
 int main(int ac, char ** av)
 {
-	t_mlx	mlx;
-
-	if (ac == 2 && check_args(av))
+	t_mlx									mlx;
+	int (*func_tab[4]) (t_fract *, double, double);
+	if (ac == 2 && (mlx.func = func_tab[check_args(av)]) != 0)
 	{
 		mlx.mlx = mlx_init();
 		mlx.win = mlx_new_window(mlx.mlx, WIDTH, HEIGHT, "fractol wbeets");
 		mlx_key_hook(mlx.win, key_hook, &mlx);
-		mlx.av = av;
 		mlx_expose_hook(mlx.win, expose_hook, &mlx);
 		mlx_loop(mlx.mlx);
 		(void)av;
