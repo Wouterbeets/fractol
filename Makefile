@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 NAME	= fractol
-FILES	= main.c
+FILES	= main.c\
+		  draw.c
 SRC		= $(addprefix src/, $(FILES))
 OBJ		= $(SRC:src/%.c=.obj/%.o)
 FLAGS	= -Wall -Werror -Wextra
