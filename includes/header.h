@@ -14,7 +14,7 @@
 # define HEADER_H
 
 # include "../libft/includes/libft.h"
-# include <mlx.h>
+# include "../minilibx_macos/mlx.h"
 # include <stdlib.h>
 
 # define TRUE		1
@@ -28,8 +28,6 @@
 # define BLUE 0x6692CC
 # define GREEN 0x81CC66
 # define ORANGE 0xED6205
-
-
 
 typedef struct		s_fract
 {
@@ -50,9 +48,13 @@ typedef struct		s_mlx
 {
 	void			*mlx;
 	void			*win;
-	int				(*func)(t_fract *, double, double);
+	void			(*func)(t_fract *, double, double);
+	t_fract			*calc;
+	void			*img;
 }					t_mlx;
 
 void	draw(t_mlx *mlx);
+void	julia(t_fract *calc, double x, double y);
+void	mandelbrot(t_fract *calc, double x, double y);
 
 #endif /* HEADER_H */

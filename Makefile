@@ -17,12 +17,13 @@ SRC		= $(addprefix src/, $(FILES))
 OBJ		= $(SRC:src/%.c=.obj/%.o)
 FLAGS	= -Wall -Werror -Wextra
 DFLAGS	= -Wall -Werror -Wextra -g3 -pedantic
-LIBCOM	= -L libft -lft -L /usr/X11/lib -lmlx -lXext -lX11
+LIBCOM	= -L libft -lft -L minilibx_macos -lmlx -framework OpenGL -framework AppKit
+
 NO_COLOR=\x1b[0m
 OK_COLOR=\x1b[32;01m
 ERROR_COLOR=\x1b[31;01m
 WARN_COLOR=\x1b[33;01m
-INCLUDE	= -I includes -I libft/includes
+INCLUDE	= -I includes -I libft/includes -I minilibx_macos
 DEB		= .deb/test
 
 all: $(NAME)
