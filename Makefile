@@ -12,7 +12,8 @@
 
 NAME	= fractol
 FILES	= main.c\
-		  draw.c
+		  draw.c\
+		  hooks.c
 SRC		= $(addprefix src/, $(FILES))
 OBJ		= $(SRC:src/%.c=.obj/%.o)
 FLAGS	= -Wall -Werror -Wextra
@@ -58,7 +59,7 @@ fclean: clean
 gdb:
 	@mkdir -p .deb/
 	@cc -o $(DEB) $(INCLUDE) $(DFLAGS) $(LIBCOM) $(SRC)
-	gdb $(DEB)
+	lldb $(DEB)
 
 lib:
 	@echo "\t---CHECKING LIBRARY---"

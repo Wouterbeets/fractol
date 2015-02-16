@@ -42,6 +42,8 @@ typedef struct		s_fract
 	double			move_y;
 	int				color;
 	int				iterations;
+	double			p_real;
+	double			p_imag;
 }					t_fract;
 
 typedef struct		s_mlx
@@ -51,10 +53,20 @@ typedef struct		s_mlx
 	void			(*func)(t_fract *, double, double);
 	t_fract			*calc;
 	void			*img;
+	char			*data;
+	int				bpp;	
+	int				bypp;	
+	int				size_line;
+	int				endian;
 }					t_mlx;
 
 void	draw(t_mlx *mlx);
 void	julia(t_fract *calc, double x, double y);
 void	mandelbrot(t_fract *calc, double x, double y);
+void	init_frac(t_fract *calc);
+int		key_hook(int keycode, t_mlx *e);
+int		expose_hook(t_mlx *mlx);
+int		check_args(char** av);
+void	(*get_fractal_func(char **av))(t_fract *, double, double);
 
 #endif /* HEADER_H */

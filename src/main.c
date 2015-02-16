@@ -12,53 +12,60 @@
 
 # include "../includes/header.h"
 # include "../minilibx_macos/mlx.h"
-#include <stdio.h>
 
-int		key_hook(int keycode, t_mlx *e)
+void	init_frac(t_fract *calc)
 {
-	(void)e;
-	printf("%d\n", keycode);
-	if (keycode == 53)
-		exit(0);
-	return (0);
+	calc->c_real = -0.7;
+	calc->c_imag = 0.27015;
+	calc->new_real = 0;
+	calc->new_imag = 0;
+	calc->old_real = 0;
+	calc->new_real = 0;
+	calc->zoom = 2;
+	calc->move_x = 0;
+	calc->move_y = 0;
+	calc->color = BLUE;
+	calc->iterations = 300;
+	calc->p_real = 0;
+	calc->p_imag = 0;
 }
-
-int		expose_hook(t_mlx *mlx)
-{
-	(void)mlx;
-	draw(mlx);
-	return (0);
-}
-
 int		check_args(char** av)
 {
 	if (ft_strcmp(av[1], "mandelbrot") == 0)
 		return (0);
-	if (ft_strcmp(av[1], "foo") == 0)
+	if (ft_strcmp(av[1], "newton") == 0)
 		return (1);
 	if (ft_strcmp(av[1], "julia") == 0)
 		return (2);
 	return (3);
 }
 
-int main(int ac, char ** av)
+int		init_mlx(t_mlx *mlx, int ac, char **av)
+{
+	if (ac == 2 && (mlx->func = get_fractal_func(av)) != 0)
+	{
+		mlx->mlx = mlx_init();
+		mlx->win = mlx_new_window(mlx->mlx, WIDTH, HEIGHT, "fractol wbeets");
+		mlx->img = mlx_new_image(mlx->mlx, WIDTH, HEIGHT);
+		mlx->data = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line, &mlx->endian); 
+		mlx->bypp = mlx->bpp / 8;
+		mlx_key_hook(mlx->win, key_hook, &mlx);
+		mlx_expose_hook(mlx->win, expose_hook, &mlx);
+		return (1);
+	}
+	return (-1);
+}
+
+int		main(int ac, char ** av)
 {
 	t_mlx	mlx;
-	void	(*func_tab[4]) (t_fract *, double, double);
-	func_tab[0] = &mandelbrot;
-	func_tab[1] = 0;
-	func_tab[2] = &julia;
-	func_tab[3] = 0;
-	if (ac == 2 && (mlx.func = func_tab[check_args(av)]) != 0)
-	{
-		mlx.mlx = mlx_init();
-		mlx.win = mlx_new_window(mlx.mlx, WIDTH, HEIGHT, "fractol wbeets");
-		mlx.img = mlx_new_image(mlx.mlx, WIDTH, HEIGHT);
-		mlx_key_hook(mlx.win, key_hook, &mlx);
-		mlx_expose_hook(mlx.win, expose_hook, &mlx);
+	t_fract	calc;
+
+	init_frac(&calc);
+	mlx.calc = &calc;
+	mlx.mlx = 0;
+	if (init_mlx(&mlx, ac, av))
 		mlx_loop(mlx.mlx);
-		(void)av;
-	}
 	else 
 		ft_putstr("USAGE: ./fractole -[madelbrot, julia, foo]");
 	return (0);
