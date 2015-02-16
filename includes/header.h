@@ -14,13 +14,14 @@
 # define HEADER_H
 
 # include "../libft/includes/libft.h"
-# include "../minilibx_macos/mlx.h"
+# include "../includes/mlx_bindings.h"
+//# include "../minilibx_macos/mlx.h"
 # include <stdlib.h>
 
 # define TRUE		1
 # define FALSE		0
-# define WIDTH		800
-# define HEIGHT		800
+# define WIDTH		600
+# define HEIGHT		600
 
 # define WHITE 0xFFFFFF
 # define GREY 0x555555

@@ -11,18 +11,29 @@ int		expose_hook(t_mlx *mlx)
 int		key_hook(int keycode, t_mlx *e)
 {
 	(void)e;
-	if (keycode == 123)
+	if (keycode == KEYCODE_RIGHT)
 		e->calc->move_x -= 0.01;
-	else if (keycode == 124)
+	else if (keycode == KEYCODE_LEFT)
 		e->calc->move_x += 0.01;
 	else if (keycode == 125)
 		e->calc->move_y -= 0.01;
 	else if (keycode == 126)
 		e->calc->move_y += 0.01;
-	else if (keycode == 53)
+	else if (keycode == KEYCODE_ECHAP)
 		exit(0);
 	draw(e);
 	return (0);
+}
+
+int		check_args(char** av)
+{
+	if (ft_strcmp(av[1], "mandelbrot") == 0)
+		return (0);
+	if (ft_strcmp(av[1], "newton") == 0)
+		return (1);
+	if (ft_strcmp(av[1], "julia") == 0)
+		return (2);
+	return (3);
 }
 
 void	(*get_fractal_func(char **av))(t_fract *, double, double) 

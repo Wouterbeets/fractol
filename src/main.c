@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 # include "../includes/header.h"
-# include "../minilibx_macos/mlx.h"
+//# include "../minilibx_macos/mlx.h"
+#include <mlx.h>
 
 void	init_frac(t_fract *calc)
 {
@@ -29,16 +30,6 @@ void	init_frac(t_fract *calc)
 	calc->p_real = 0;
 	calc->p_imag = 0;
 }
-int		check_args(char** av)
-{
-	if (ft_strcmp(av[1], "mandelbrot") == 0)
-		return (0);
-	if (ft_strcmp(av[1], "newton") == 0)
-		return (1);
-	if (ft_strcmp(av[1], "julia") == 0)
-		return (2);
-	return (3);
-}
 
 int		init_mlx(t_mlx *mlx, int ac, char **av)
 {
@@ -47,13 +38,13 @@ int		init_mlx(t_mlx *mlx, int ac, char **av)
 		mlx->mlx = mlx_init();
 		mlx->win = mlx_new_window(mlx->mlx, WIDTH, HEIGHT, "fractol wbeets");
 		mlx->img = mlx_new_image(mlx->mlx, WIDTH, HEIGHT);
-		mlx->data = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line, &mlx->endian); 
+		mlx->data = mlx_get_data_addr(mlx->img, &(mlx->bpp), &(mlx->size_line), &(mlx->endian)); 
 		mlx->bypp = mlx->bpp / 8;
-		mlx_key_hook(mlx->win, key_hook, &mlx);
-		mlx_expose_hook(mlx->win, expose_hook, &mlx);
+		mlx_key_hook(mlx->win, key_hook, mlx);
+		mlx_expose_hook(mlx->win, expose_hook, mlx);
 		return (1);
 	}
-	return (-1);
+	return (0);
 }
 
 int		main(int ac, char ** av)
