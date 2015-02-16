@@ -41,6 +41,7 @@ int		init_mlx(t_mlx *mlx, int ac, char **av)
 		mlx->data = mlx_get_data_addr(mlx->img, &(mlx->bpp), &(mlx->size_line), &(mlx->endian)); 
 		mlx->bypp = mlx->bpp / 8;
 		mlx_key_hook(mlx->win, key_hook, mlx);
+		mlx_loop_hook(mlx->win, loop_hook, mlx);
 		mlx_expose_hook(mlx->win, expose_hook, mlx);
 		return (1);
 	}

@@ -69,5 +69,6 @@ int		key_hook(int keycode, t_mlx *e);
 int		expose_hook(t_mlx *mlx);
 int		check_args(char** av);
 void	(*get_fractal_func(char **av))(t_fract *, double, double);
+int		loop_hook(t_mlx *mlx);
 
 #endif /* HEADER_H */
