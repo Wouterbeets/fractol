@@ -22,13 +22,13 @@ int		key_hook(int keycode, t_mlx *e)
 	else if (keycode == KEYCODE_ECHAP)
 		exit(0);
 	bzero(e->data, WIDTH * HEIGHT * e->bypp);
-	draw(e);
 	return (0);
 }
 
 int		loop_hook(t_mlx *mlx)
 {
 	(void)mlx;
+	draw(mlx);
 
 	return (0);
 }

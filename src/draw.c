@@ -1,19 +1,9 @@
 
+
 #include "../includes/header.h"
 //# include "../minilibx_macos/mlx.h"
 #include <mlx.h>
 #include <stdio.h>
-//
-//int		pixel_to_image(t_mlx *mlx, int x, int y, int c)
-//{
-//	int	octets;
-//
-//	octets = mlx->bpp / 8;
-//	if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
-//		ft_memcpy(&mlx->data[octets * (x * octets + ((mlx->size_line / octets) * y))]
-//					, &c, octets);
-//	return (0);
-//}
 
 int			pixel_to_image(t_mlx *mlx, int x, int y, int c)
 {
@@ -22,7 +12,6 @@ int			pixel_to_image(t_mlx *mlx, int x, int y, int c)
 	c = BLUE * c;
 	if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
 	{
-//		printf("x = %d\t, y = %d\t c = %d\t mlx->line_size = %d\n", x, y, c, mlx->size_line);
 		offset = (y * WIDTH	+ x) * mlx->bypp;
 		ft_memmove(mlx->data + offset, &c, mlx->bypp);
 	}
