@@ -8,28 +8,39 @@ int		expose_hook(t_mlx *mlx)
 	return (0);
 }
 
-int		key_hook(int keycode, t_mlx *e)
+int		key_hook(int keycode, t_mlx *mlx)
 {
-	(void)e;
 	if (keycode == KEYCODE_RIGHT)
-		e->calc->move_x -= 0.01;
+		mlx->calc->move_x += 0.01;
 	else if (keycode == KEYCODE_LEFT)
-		e->calc->move_x += 0.01;
-	else if (keycode == 125)
-		e->calc->move_y -= 0.01;
-	else if (keycode == 126)
-		e->calc->move_y += 0.01;
+		mlx->calc->move_x -= 0.01;
+	else if (keycode == KEYCODE_UP)
+		mlx->calc->move_y -= 0.01;
+	else if (keycode == KEYCODE_DOWN)
+		mlx->calc->move_y += 0.01;
+	else if (keycode == KEYCODE_PAVNUM_MINUS)
+		mlx->calc->iterations--;
+	else if (keycode == KEYCODE_C)
+		mlx->bw = mlx->bw == 1 ? 0 : 1;
+	else if (keycode == KEYCODE_PAVNUM_PLUS)
+	{
+		mlx->calc->iterations++;
+		ft_putstr("it = ");
+		ft_putnbr(MAX_IT);
+		ft_putstr("\n");
+	}
 	else if (keycode == KEYCODE_ECHAP)
 		exit(0);
-	bzero(e->data, WIDTH * HEIGHT * e->bypp);
+	bzero(mlx->data, WIDTH * HEIGHT * mlx->bypp);
+	mlx->redraw = 1;
 	return (0);
 }
 
 int		loop_hook(t_mlx *mlx)
 {
-	(void)mlx;
-	draw(mlx);
-
+	if (mlx->redraw == 1)
+		draw(mlx);
+	mlx->redraw = 0;
 	return (0);
 }
 

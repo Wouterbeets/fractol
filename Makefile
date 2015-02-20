@@ -13,7 +13,8 @@
 NAME	= fractol
 FILES	= main.c\
 		  draw.c\
-		  hooks.c
+		  hooks.c\
+		  mousehook.c
 SRC		= $(addprefix src/, $(FILES))
 OBJ		= $(SRC:src/%.c=.obj/%.o)
 FLAGS	= -Wall -Werror -Wextra

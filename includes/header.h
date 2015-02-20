@@ -20,15 +20,24 @@
 
 # define TRUE		1
 # define FALSE		0
-# define WIDTH		600
-# define HEIGHT		600
+# define WIDTH		800
+# define HEIGHT		800
+# define ZOOM_STEP	1.05
 
 # define WHITE 0xFFFFFF
 # define GREY 0x555555
+# define BLACK 0x111111
 # define VIOLET 0xB545AE
 # define BLUE 0x6692CC
 # define GREEN 0x81CC66
 # define ORANGE 0xED6205
+# define MAX_IT mlx->calc->iterations
+
+typedef struct		s_complex
+{
+	double			a;
+	double			b;
+}					t_complex;
 
 typedef struct		s_fract
 {
@@ -49,26 +58,42 @@ typedef struct		s_fract
 
 typedef struct		s_mlx
 {
+	int				redraw;
 	void			*mlx;
 	void			*win;
 	void			(*func)(t_fract *, double, double);
 	t_fract			*calc;
 	void			*img;
 	char			*data;
+	int				bw;
 	int				bpp;	
 	int				bypp;	
 	int				size_line;
 	int				endian;
+	int				old_mouse_x;
+	int				old_mouse_y;
 }					t_mlx;
-
+/*fractals*/
 void	draw(t_mlx *mlx);
 void	julia(t_fract *calc, double x, double y);
 void	mandelbrot(t_fract *calc, double x, double y);
 void	init_frac(t_fract *calc);
-int		key_hook(int keycode, t_mlx *e);
+void	(*get_fractal_func(char **av))(t_fract *, double, double);
+int		zoomin(int x, int y, double zoom, t_mlx *mlx);
+
+/*hooks*/
+int		key_hook(int keycode, t_mlx *mlx);
 int		expose_hook(t_mlx *mlx);
 int		check_args(char** av);
-void	(*get_fractal_func(char **av))(t_fract *, double, double);
 int		loop_hook(t_mlx *mlx);
+int		mouse_button_hook(int button, int x, int y, t_mlx *mlx);
+int		mouse_motion_hook(int x, int y, t_mlx *mlx);
+
+/*complex functions*/
+t_complex	complex_calc(t_complex c1, t_complex c2, char op);
+t_complex	complex_power(t_complex c1, unsigned int n);
+t_complex	complex_new(double aa, double bb);
+double		complex_dist(t_complex c1, t_complex c2);
+double		complex_norm(t_complex c);
 
 #endif /* HEADER_H */
