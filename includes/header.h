@@ -54,6 +54,7 @@ typedef struct		s_fract
 	int				iterations;
 	double			p_real;
 	double			p_imag;
+	double			newtond;
 }					t_fract;
 
 typedef struct		s_mlx
@@ -77,9 +78,10 @@ typedef struct		s_mlx
 void	draw(t_mlx *mlx);
 void	julia(t_fract *calc, double x, double y);
 void	mandelbrot(t_fract *calc, double x, double y);
+void	newton(t_fract *calc, double x, double y);
 void	init_frac(t_fract *calc);
 void	(*get_fractal_func(char **av))(t_fract *, double, double);
-int		zoomin(int x, int y, double zoom, t_mlx *mlx);
+int		zoom(int x, int y, double zoom, t_mlx *mlx);
 
 /*hooks*/
 int		key_hook(int keycode, t_mlx *mlx);
