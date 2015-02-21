@@ -1,7 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mousehook.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeets <wbeets@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/02/21 09:49:20 by wbeets            #+#    #+#             */
+/*   Updated: 2015/02/21 09:49:22 by wbeets           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/mlx_bindings.h"
 #include "../includes/header.h"
-#include <stdio.h>
+
+int		zoom(int x, int y, double zoom, t_mlx *mlx)
+{
+	double move_x;
+	double move_y;
+
+	mlx->calc->zoom *= zoom;
+	move_x = ((double)x - (WIDTH / 2.0)) / (WIDTH / 2);
+	move_y = ((double)y - (HEIGHT / 2.0)) / (HEIGHT / 2);
+	mlx->calc->move_x += move_x / mlx->calc->zoom / 10;
+	mlx->calc->move_y += move_y / mlx->calc->zoom / 10;
+	return (1);
+}
+
 int		mouse_button_hook(int button, int x, int y, t_mlx *mlx)
 {
 	mlx->redraw = 1;
@@ -21,20 +45,7 @@ int		mouse_motion_hook(int x, int y, t_mlx *mlx)
 		mlx->calc->c_imag += ((double)mlx->old_mouse_x - (double)x) / 300.0;
 		mlx->redraw = 1;
 	}
-	mlx->old_mouse_x = x;	
-	mlx->old_mouse_y = y;	
+	mlx->old_mouse_x = x;
+	mlx->old_mouse_y = y;
 	return (0);
-}
-
-int		zoom(int x, int y, double zoom, t_mlx *mlx)
-{
-	double move_x; 
-	double move_y;
-
-	mlx->calc->zoom *= zoom;
-	move_x = ((double)x - (WIDTH / 2.0)) / (WIDTH / 2);
-	move_y = ((double)y - (HEIGHT / 2.0)) / (HEIGHT / 2);
-	mlx->calc->move_x += move_x / mlx->calc->zoom / 10;
-	mlx->calc->move_y += move_y / mlx->calc->zoom / 10;
-	return (1);
 }

@@ -15,7 +15,6 @@
 
 # include "../libft/includes/libft.h"
 # include "../includes/mlx_bindings.h"
-//# include "../minilibx_macos/mlx.h"
 # include <stdlib.h>
 
 # define TRUE		1
@@ -32,12 +31,6 @@
 # define GREEN 0x81CC66
 # define ORANGE 0xED6205
 # define MAX_IT mlx->calc->iterations
-
-typedef struct		s_complex
-{
-	double			a;
-	double			b;
-}					t_complex;
 
 typedef struct		s_fract
 {
@@ -67,35 +60,42 @@ typedef struct		s_mlx
 	void			*img;
 	char			*data;
 	int				bw;
-	int				bpp;	
-	int				bypp;	
+	int				bpp;
+	int				bypp;
 	int				size_line;
 	int				endian;
 	int				old_mouse_x;
 	int				old_mouse_y;
 }					t_mlx;
-/*fractals*/
-void	draw(t_mlx *mlx);
-void	julia(t_fract *calc, double x, double y);
-void	mandelbrot(t_fract *calc, double x, double y);
-void	newton(t_fract *calc, double x, double y);
-void	init_frac(t_fract *calc);
-void	(*get_fractal_func(char **av))(t_fract *, double, double);
-int		zoom(int x, int y, double zoom, t_mlx *mlx);
 
-/*hooks*/
-int		key_hook(int keycode, t_mlx *mlx);
-int		expose_hook(t_mlx *mlx);
-int		check_args(char** av);
-int		loop_hook(t_mlx *mlx);
-int		mouse_button_hook(int button, int x, int y, t_mlx *mlx);
-int		mouse_motion_hook(int x, int y, t_mlx *mlx);
+/*
+** fractal functions
+*/
 
-/*complex functions*/
-t_complex	complex_calc(t_complex c1, t_complex c2, char op);
-t_complex	complex_power(t_complex c1, unsigned int n);
-t_complex	complex_new(double aa, double bb);
-double		complex_dist(t_complex c1, t_complex c2);
-double		complex_norm(t_complex c);
+void				julia(t_fract *calc, double x, double y);
+void				mandelbrot(t_fract *calc, double x, double y);
+void				newton(t_fract *calc, double x, double y);
+void				init_frac(t_fract *calc);
+void				(*get_fractal_func(char **av))(t_fract *, double, double);
+int					zoom(int x, int y, double zoom, t_mlx *mlx);
 
-#endif /* HEADER_H */
+/*
+** draw
+*/
+
+void				draw(t_mlx *mlx);
+int					get_color(double real, double imag, int max);
+int					pixel_to_image(t_mlx *mlx, int x, int y, int c);
+
+/*
+**hooks
+*/
+
+int					key_hook(int keycode, t_mlx *mlx);
+int					expose_hook(t_mlx *mlx);
+int					check_args(char **av);
+int					loop_hook(t_mlx *mlx);
+int					mouse_button_hook(int button, int x, int y, t_mlx *mlx);
+int					mouse_motion_hook(int x, int y, t_mlx *mlx);
+
+#endif

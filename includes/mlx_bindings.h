@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_bindings.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeets <wbeets@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/02/21 10:05:54 by wbeets            #+#    #+#             */
+/*   Updated: 2015/02/21 10:06:07 by wbeets           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef MLX_BINDING_H
-# define MLX_BINDING_H
+#ifndef MLX_BINDINGS_H
+# define MLX_BINDINGS_H
 
 /*
- * ** Keyboard
- * */
+** Keyboard
+*/
 
 # define KEYCODE_ECHAP			65307
 # define KEYCODE_SPACE			32
@@ -80,8 +91,8 @@
 # define KEYCODE_PAVNUM_EQUAL	65469
 
 /*
- * ** Mouse
- * */
+** Mouse
+*/
 
 # define MOUSE_BUTTON_1			1
 # define MOUSE_BUTTON_2			3

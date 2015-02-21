@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeets <wbeets@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/02/21 09:49:40 by wbeets            #+#    #+#             */
+/*   Updated: 2015/02/21 09:49:43 by wbeets           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/header.h"
 
@@ -40,7 +51,7 @@ int		loop_hook(t_mlx *mlx)
 	return (0);
 }
 
-int		check_args(char** av)
+int		check_args(char **av)
 {
 	if (ft_strcmp(av[1], "mandelbrot") == 0)
 		return (0);
@@ -51,7 +62,7 @@ int		check_args(char** av)
 	return (3);
 }
 
-void	(*get_fractal_func(char **av))(t_fract *, double, double) 
+void	(*get_fractal_func(char **av))(t_fract *, double, double)
 {
 	int		func;
 
@@ -63,6 +74,6 @@ void	(*get_fractal_func(char **av))(t_fract *, double, double)
 	if (func == 2)
 		return (&julia);
 	if (func == 3)
-		return 0;
-	return 0;
+		return (0);
+	return (0);
 }
